@@ -1,0 +1,238 @@
+*{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: blue;
+}
+
+.grid-container {
+  color: bisque;
+  display: grid;
+  grid-template-columns: 300px 1fr 1fr 1fr;
+  grid-template-rows: 0fr ;
+  grid-template-areas:
+    "side header header header"
+    "side main main main";
+  height: 100vh;
+}
+
+/* Header */
+.header {
+  grid-area:header ;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 30px 0 30px;
+  background-color: #707070;
+  
+}
+
+.header h1 {
+  font-size: 150px;
+  color: #CCCCCC;
+}
+/*End Header*/
+
+/* Side */
+#side{
+  grid-area: side;
+  height: 100%;
+  background-color: #3d3d3d;
+
+}
+
+.side-title{
+  margin-bottom: 50px;
+  height: 16%;
+  background-color: darkgrey;
+
+}
+
+.side-brand{
+  display: flex;
+  font-size: 40px;
+  font-weight: 700;
+  text-align: center;
+  color: #292929;
+  padding-top: 40px;
+  padding-left: 10px;
+  
+}
+
+.side-list{
+  padding: 0;
+  
+}
+
+.items{
+  padding-top: 20px;
+    margin-bottom: 50px;
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    padding-right:20px;
+}
+
+/* End Side */
+
+/* Home */
+.home-container {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #CCCCCC;
+  height: 100vh;
+  padding: 20px;
+}
+
+
+
+.styled-table {
+  width: 70%;
+  border-collapse: collapse;
+  margin: 150px 0;
+  font-size: 18px;
+  margin-left: 50px;
+  text-align: center;
+  position: absolute;
+}
+
+.styled-table thead tr {
+  background-color: #292929;
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+}
+
+.styled-table th, .styled-table td {
+  padding: 15px 15px;
+  border: 1px solid #dddddd;
+}
+
+.styled-table tbody{
+  background-color: Gray;
+  text-align: center;
+  color: black;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+
+
+.styled-table tbody tr.active-row {
+  font-weight: bold;
+  color: #009879;
+}
+
+/* End Home */
+
+/* Table */
+.table-container{
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.div-password{
+position: relative;
+width: fit-content;
+}
+
+.input-box {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 8px;
+  width: 100%;
+  border: 1px solid #ddd;
+  height: 50px;
+  margin: 30px 0px;
+  overflow: auto; 
+
+}
+
+.input-text {
+  display: flex;
+  width: 270px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-text:focus {
+  display: flex;
+  border-color: red;
+  box-shadow: 0 0 8px rgba(175, 76, 76, 0.5);
+}
+
+.add-button {
+  padding: 10px 20px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.add-button:hover {
+  background-color: #da6d6d;
+}
+
+p{
+  margin-top: -2px;
+}
+
+.toggle-button{
+ position: absolute;
+ right: 20px; 
+ top: 50%;
+ transform: translateY(-50%);
+ border: none;
+ background: transparent;
+ cursor: pointer;
+}
+
+#editButton{
+  position: relative;
+  height: 50px;
+  width: 60px;
+  padding: 0%;
+  
+}
+
+.form-style{
+  display: flex;
+  gap: 10px;
+}
+
+
+.input-valid {
+  border-color: black;
+}
+
+.input-invalid {
+  border-color: red;
+  color: red;
+  
+}
+
+
+/* End Table 7*/
