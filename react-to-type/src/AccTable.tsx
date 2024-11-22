@@ -5,13 +5,17 @@ type User = {
   name: string;
   email: string;
   password: string;
+  role: string;
 };
+
+type EditableUser = Pick<User, "name" | "email" | "role">;
 
 function AccTable() {
   const [data, setData] = useState<User[]>([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("user");
   const [isValid, setIsValid] = useState(true);
   const [showPass, setShowPass] = useState(false);
   const [editId, setEditId] = useState<number | null>(null);
@@ -43,6 +47,8 @@ function AccTable() {
     }
   };
 
+  const handleRoleChange = (userId: number, newRole: string) => {};
+
   const handleSave = () => {
     if (editValues) {
       setData((prevData) =>
@@ -63,9 +69,16 @@ function AccTable() {
     console.log("name:", name);
     console.log("email:", email);
     console.log("password:", password);
+    console.log("role:", role);
     if (name && email && password) {
       // Thêm người dùng vào mảng data
-      const newUser: User = { id: data.length + 1, name, email, password };
+      const newUser: User = {
+        id: data.length + 1,
+        name,
+        email,
+        password,
+        role,
+      };
       setData((prevData) => [...prevData, newUser]);
 
       // Reset các input về chuỗi rỗng
@@ -127,8 +140,8 @@ function AccTable() {
             <th>Name</th>
             <th>Email</th>
             <th>Password</th>
-            <th>Edit</th>
             <th>Role</th>
+            <th>Edit</th>
           </tr>
         </thead>
         <tbody>
@@ -138,6 +151,8 @@ function AccTable() {
               <td>
                 {editId === user.id ? (
                   <input
+                    className="new-input-box"
+                    placeholder="change"
                     type="text"
                     name="name"
                     value={editValues?.name || ""}
@@ -150,6 +165,8 @@ function AccTable() {
               <td>
                 {editId === user.id ? (
                   <input
+                    className="new-input-box"
+                    placeholder="change"
                     type="email"
                     name="email"
                     value={editValues?.email || ""}
@@ -162,6 +179,8 @@ function AccTable() {
               <td>
                 {editId === user.id ? (
                   <input
+                    className="new-input-box"
+                    placeholder="change"
                     type="password"
                     name="password"
                     value={editValues?.password || ""}
@@ -172,13 +191,54 @@ function AccTable() {
                 )}
               </td>
               <td>
+                {/* {editId === user.id ? (
+                  <input
+                    placeholder="change"
+                    type="role"
+                    name="role"
+                    value={editValues?.role || ""}
+                    onChange={handleInputChange}
+                  />
+                ) : (
+                  user.role
+                )} */}
+                <select
+                  className="selection"
+                  title="."
+                  value={user.role}
+                  onChange={(e) => handleRoleChange(user.id, e.target.value)}
+                >
+                  <option value="user">User</option>
+                  <option value="admin">Admin</option>
+                  <option value="other">Other</option>
+                </select>
+              </td>
+              <td>
                 {editId === user.id ? (
                   <>
-                    <button onClick={handleSave}>Save</button>
-                    <button onClick={handleCancel}>Cancel</button>
+                    <button
+                      className="save-button"
+                      type="button"
+                      onClick={handleSave}
+                    >
+                      Save
+                    </button>
+                    <button
+                      className="cancel-button"
+                      type="button"
+                      onClick={handleCancel}
+                    >
+                      Cancel
+                    </button>
                   </>
                 ) : (
-                  <button onClick={() => handleEdit(user)}>Edit</button>
+                  <button
+                    className="edit-button"
+                    type="button"
+                    onClick={() => handleEdit(user)}
+                  >
+                    Edit
+                  </button>
                 )}
               </td>
             </tr>
