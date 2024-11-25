@@ -8,14 +8,12 @@ type User = {
   role: string;
 };
 
-type EditableUser = Pick<User, "name" | "email" | "role">;
-
 function AccTable() {
   const [data, setData] = useState<User[]>([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("user");
+  const [role] = useState("User");
   const [isValid, setIsValid] = useState(true);
   const [showPass, setShowPass] = useState(false);
   const [editId, setEditId] = useState<number | null>(null);
@@ -47,7 +45,24 @@ function AccTable() {
     }
   };
 
-  const handleRoleChange = (userId: number, newRole: string) => {};
+  const handleRoleChange = (userId: number, newRole: string) => {
+    setData((prevData) => {
+      const updatedData = prevData.map((user) =>
+        user.id === userId ? { ...user, role: newRole } : user
+      );
+      console.log("Updated Data:", updatedData); // Debugging
+      return updatedData;
+    });
+
+    setEditValues((user) =>
+      user
+        ? {
+            ...user,
+            role: newRole,
+          }
+        : null
+    );
+  };
 
   const handleSave = () => {
     if (editValues) {
@@ -191,27 +206,19 @@ function AccTable() {
                 )}
               </td>
               <td>
-                {/* {editId === user.id ? (
-                  <input
-                    placeholder="change"
-                    type="role"
-                    name="role"
-                    value={editValues?.role || ""}
-                    onChange={handleInputChange}
-                  />
+                {editId === user.id ? (
+                  <select
+                    className="selection"
+                    value={user.role}
+                    onChange={(e) => handleRoleChange(user.id, e.target.value)}
+                  >
+                    <option value="User">User</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Other">Other</option>
+                  </select>
                 ) : (
                   user.role
-                )} */}
-                <select
-                  className="selection"
-                  title="."
-                  value={user.role}
-                  onChange={(e) => handleRoleChange(user.id, e.target.value)}
-                >
-                  <option value="user">User</option>
-                  <option value="admin">Admin</option>
-                  <option value="other">Other</option>
-                </select>
+                )}
               </td>
               <td>
                 {editId === user.id ? (
